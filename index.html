@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		const link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+<!-- https://www.youtube.com/watch?v=xaEO_Rfj_cY -->
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown>
+				## DOM & Events
+			</section>
+			<section>
+				<h2>What is DOM?</h2>
+				<ul>
+					<li class="fragment">Document Object Model.</li>
+					<li class="fragment">The HTML represented as an object.
+						<pre><code class="javascript" data-trim contenteditable style="font-size:24px;">
+							document.getElementById('id').innerHTML
+						</code></pre>
+					</li>
+					<li class="fragment">Uses dot notation to access HTML elements.</li>
+					<li class="fragment">We have used a little bit of it already.</li>
+				</ul>
+			</section>
+			<section>
+				<h2>What can we do with DOM?</h2>
+				<ul>
+					<li class="fragment">Add and Remove HTML elements.</li>
+					<li class="fragment">Modify CSS properties on HTML elements.</li>
+					<li class="fragment">Trigger code when events happen on an element.</li>
+					<li class="fragment">Change the innerHTML of elements.</li>
+				</ul>
+			</section>
+			<section>
+				<h2>DOM Events</h2>
+				<ul>
+					<li class="fragment">Events trigger when certain criteria are met.</li>
+					<li class="fragment">Such as a click, mouse over, key press, on load.</li>
+					<li class="fragment">You can tie these events to functions that you create that will be run when the event
+						triggers.
+						<pre class="fragment"><code class="xml" data-trim contenteditable style="font-size:24px;">
+							<button onclick = 'MyFunction()'>Click Me!</button>
+						</code></pre>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Triggers</h2>
+				</section>
+				<section>
+					<h3>Mouse Events</h3>
+					<ul>
+						<li class="fragment">click</li>
+						<li class="fragment">contextmenu</li>
+						<li class="fragment">dblclick</li>
+						<li class="fragment">mousedown</li>
+						<li class="fragment">mouseenter</li>
+						<li class="fragment">mouseleave</li>
+						<li class="fragment">mouseout</li>
+						<li class="fragment">mouseover</li>
+						<li class="fragment">mouseup</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Keyboard Events</h3>
+					<ul>
+						<li class="fragment">keydown</li>
+						<li class="fragment">keypress</li>
+						<li class="fragment">keyup</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Drag Events</h3>
+					<ul>
+						<li class='fragment'>drag</li>
+						<li class='fragment'>dargend</li>
+						<li class='fragment'>dragenter</li>
+						<li class='fragment'>dragover</li>
+						<li class='fragment'>dragleave</li>
+						<li class='fragment'>dragstart</li>
+						<li class='fragment'>drop</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Focus Events</h3>
+					<ul>
+						<li class="fragment">focus</li>
+						<li class="fragment">blur</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Touch Events</h3>
+					<ul>
+						<li class="fragment">touchstart</li>
+						<li class="fragment">touchmove</li>
+						<li class="fragment">touchend</li>
+						<li class="fragment">touchcancel</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Event Handling Models</h2>
+					<ul>
+						<li class="fragment">inline.</li>
+						<li class="fragment">traditional.</li>
+						<li class="fragment">W3C.</li>
+					</ul>
+				</section>
+				<section>
+					<h3><b>Inline</b> Event Handling Model</h3>
+					<div class='fragment'>
+						<button onClick="alert('clicked!')" style='font-size:30px;'>Click me!</button>
+						<pre>
+							<code class="xml" data-trim contenteditable style="font-size:20px;">
+								<button onClick="alert('clicked!')">Click me!</button>
+							</code></pre>
+					</div>
+					<p class='fragment' style='color:#FF4848'>Don’t recommend embedding events directly in page elements!</p>
+				</section>
+				<section>
+					<h3><b>Traditional</b> Event Handling Model</h3>
+					<div class='fragment'>
+						<button id='btn-click2' style='font-size:30px;'>Click me!</button>
+						<script>
+							const button2 = document.querySelector('#btn-click2');
+							button2.onclick = () => {
+								alert('clicked!')
+							}
+						</script>
+						<pre>
+							<code class="xml" data-trim contenteditable style="font-size:20px;">
+								<button id='btn-click'>Click me!</button>
+								<script>
+									const button = document.querySelector('#btn-click');
+									button.onclick = () => {
+										alert('clicked!')
+									}
+								</script>
+							</code></pre>
+					</div>
+				</section>
+				<section>
+					<h3><b>W3C</b> Event Handling Model</h3>
+					<div class='fragment'>
+						<button id='btn-click3' style='font-size:30px;'>Click me!</button>
+						<script>
+							const button3 = document.querySelector('#btn-click3');
+							button3.addEventListener('click', doSomething)
+
+							function doSomething() {
+								alert('clicked!')
+							}
+						</script>
+						<pre>
+							<code class="xml" data-trim contenteditable style="font-size:20px;">
+								<button id='btn-click'>Click me!</button>
+								<script>
+									const buttonW3C = document.querySelector('#btn-click');
+									buttonW3C.addEventListener('click',doSomething)
+									function doSomething (){
+										alert('clicked!')
+									}
+								</script>
+							</code></pre>
+					</div>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Event Object</h2>
+					<p class='fragment'>All event objects in the DOM are based on the Event Object.</p>
+					<pre class='fragment'>
+							<code class="xml" data-trim contenteditable style="font-size:20px;">
+								<button id='button-click'>Click me!</button>
+								<script>
+									const btn = document.querySelector('#button-click');
+									button.addEventListener('click',(e)=>{
+									// e is Event Object
+									alert('clicked!')
+									})
+								</script>
+							</code></pre>
+				</section>
+				<section>
+					<h2>Event Target</h2>
+					<p class='fragment'>The target event property returns the element that triggered the event.</p>
+					<pre class='fragment'>
+							<code class="xml" data-trim contenteditable style="font-size:20px;">
+								<button id='button-target'>Click me!</button>
+								<script>
+									const btnTarget = document.querySelector('#button-target');
+									btnTarget.addEventListener('click',(e)=>{
+									alert(e.target === btnTarget)
+									})
+								</script>
+							</code></pre>
+				</section>
+			</section>
+			<section>
+				<h2>Event Methods</h2>
+				<section>
+					<p class='fragment'>preventDefault</p>
+					<pre class='fragment'>
+							<code class="xml" data-trim contenteditable style="font-size:20px;">
+<a id="link" href="http://vk.com">Vkontakte</a>
+<script>
+	const linkVk = document.querySelector('#link');
+	linkVk.addEventListener('click', function (e) {
+		e.preventDefault();
+		window.location.href = 'https://www.facebook.com/';
+	});
+</script>
+							</code>
+					</pre>
+				</section>
+				<section>
+					<p class='fragment'>stopPropagation</p>
+					<pre class='fragment'>
+						<code class="xml" data-trim contenteditable style="font-size:20px;">
+<div id='container'>
+	<a id="link" href="#">Hi</a>
+</div>
+<script>
+	const linkChild = document.querySelector('#link');
+	const container = document.querySelector('#container');
+	container.addEventListener('click', function (e) {
+		alert('hi')
+	});
+	linkChild.addEventListener('click', function (e) {
+		e.stopPropagation();
+	});
+</script>
+						</code>
+					</pre>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [{
+					src: 'plugin/markdown/marked.js'
+				},
+				{
+					src: 'plugin/markdown/markdown.js'
+				},
+				{
+					src: 'plugin/notes/notes.js',
+					async: true
+				},
+				{
+					src: 'plugin/highlight/highlight.js',
+					async: true,
+					callback: function () {
+						hljs.initHighlightingOnLoad();
+					}
+				}
+			]
+		});
+	</script>
+</body>
+
+</html>
