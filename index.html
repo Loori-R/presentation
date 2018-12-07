@@ -22,54 +22,142 @@
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
 </head>
-<!-- https://www.youtube.com/watch?v=xaEO_Rfj_cY -->
 
 <body>
 	<div class="reveal">
 		<div class="slides">
-			<section data-markdown>
-				## DOM & Events
+			<section id='1'>
+				<h2>DOM Events</h2>
+				<aside class="notes">
+					<!-- comment slide  -->
+					Hi, my name is Yura. Let's talk about DOM events.
+				</aside>
 			</section>
-			<section>
+			<section id='2'>
 				<h2>What is DOM?</h2>
 				<ul>
 					<li class="fragment">Document Object Model.</li>
 					<li class="fragment">The HTML represented as an object.
 						<pre><code class="javascript" data-trim contenteditable style="font-size:24px;">
-							document.getElementById('id').innerHTML
+							document.getElementById('id')
 						</code></pre>
 					</li>
-					<li class="fragment">Uses dot notation to access HTML elements.</li>
-					<li class="fragment">We have used a little bit of it already.</li>
 				</ul>
+				<aside class="notes">
+					<!-- comment slide  -->
+					What is DOM?
+					DOM is a Document Object Model
+					Representation of a document in the form of a tree of objects, available for editing through JavaScript.
+					Every type of element in HTML has its own DOM ‘interface’ that defines properties and methods.
+					For example, a table has an interface called HTMLTableElement.
+					You can get a reference to a particular element by writing something like this:
+					So we get an item whose id is "id"
+					You then have access to all the properties and methods that are available for that type of element.
+
+
+					<!--
+						Что такое DOM?
+						Document Object Model
+						это представление документа в виде дерева объектов, доступное для изменения через JavaScript.
+						Каждый тип элемента в HTML имеет свой собственный DOM-интерфейс, который определяет свойства и методы.
+						Например, "table" имеет интерфейс под названием "HTMLTableElement".
+						Вы можете получить ссылку на определенный элемент, написав что-то вроде этого: /code/
+						так мы получим элемент у которого идентификатор равен "ид"
+						Затем у вас есть доступ ко всем свойствам и методам, доступным для этого типа элемента.
+				-->
+
+
+				</aside>
 			</section>
-			<section>
-				<h2>What can we do with DOM?</h2>
-				<ul>
-					<li class="fragment">Add and Remove HTML elements.</li>
-					<li class="fragment">Modify CSS properties on HTML elements.</li>
-					<li class="fragment">Trigger code when events happen on an element.</li>
-					<li class="fragment">Change the innerHTML of elements.</li>
-				</ul>
-			</section>
-			<section>
+			<section id='4'>
 				<h2>DOM Events</h2>
 				<ul>
 					<li class="fragment">Events trigger when certain criteria are met.</li>
 					<li class="fragment">Such as a click, mouse over, key press, on load.</li>
 					<li class="fragment">You can tie these events to functions that you create that will be run when the event
 						triggers.
+						<div id='div-click' style='text-align:center;color:blue'>Click me!</div>
+						<script>
+							const divClick = document.getElementById('div-click');
+							divClick.onclick = () => {
+								alert('clicked!')
+							}
+						</script>
 						<pre class="fragment"><code class="xml" data-trim contenteditable style="font-size:24px;">
-							<button onclick = 'MyFunction()'>Click Me!</button>
+<div id='div-click'>Click me!</div>
+<script>
+const divClick = document.getElementById('div-click');
+divClick.onclick = () => {
+		alert('clicked!')
+	}
+</script>
 						</code></pre>
 					</li>
 				</ul>
+				<aside class="notes">
+					<!-- comment slide  -->
+					An event is a signal from the browser that something has happened. There are many types of events.
+					HTML DOM events allow JavaScript to register different event handlers on elements in an HTML document.
+					Events are normally used in combination with functions, and the function will not be executed before the event
+					occurs
+					(such as when a user clicks on an item, a function that performs an alert('clicked!') is triggered).
+
+
+					<!--
+						Событие – это сигнал от браузера о том, что что-то произошло.
+						События HTML DOM позволяют JavaScript регистрировать различные обработчики событий в элементах документа HTML.
+						События обычно используются в сочетании с функциями, и функция не будет выполняться до возникновения события
+						(например, когда пользователь нажимает кликает по элементу срабатывает функция, которая выполняет
+						alert('clicked!')).
+					-->
+				</aside>
 			</section>
-			<section>
-				<section>
+			<section id='5'>
+				<section id='5.1'>
 					<h2>Triggers</h2>
+					<aside class="notes">
+						<!-- comment slide  -->
+						Let's see a list of the most frequently used ones, just for your information:
+
+						Mouse Events - Events that occur when the mouse interacts with the HTML document belongs to the MouseEvent
+						Object.
+						click - The event occurs when the user clicks on an element
+						contextmenu - The event occurs when the user right-clicks on an element to open a context menu
+						dblclick - The event occurs when the user double-clicks on an element
+						mousedown - The event occurs when the user presses a mouse button over an element
+						mouseenter - The event occurs when the pointer is moved onto an element
+						mouseleave - The event occurs when the pointer is moved out of an element
+						mousemove - The event occurs when the pointer is moving while it is over an element
+						mouseover - The event occurs when the pointer is moved onto an element, or onto one of its children
+						mouseout - The event occurs when a user moves the mouse pointer out of an element, or out of one of its children
+
+						Keyboard - Events - Events that occur when user presses a key on the keyboard, belongs to the KeyboardEvent
+						Object.
+						keydown - The event occurs when the user is pressing a key
+						keypress - The event occurs when the user presses a key
+						keyup - The event occurs when the user releases a key
+
+						Drag Events - Events that occur when elements are dragged and/or dropped, belongs to the DragEvent Object.
+						drag - The event occurs when an element is being dragged
+						dragend - The event occurs when the user has finished dragging an element
+						dragenter - The event occurs when the dragged element enters the drop target
+						dragover - The event occurs when the dragged element is over the drop target
+						dragleave - The event occurs when the dragged element leaves the drop target
+						dragstart - The event occurs when the user starts to drag an element
+						drop - The event occurs when the dragged element is dropped on the drop target
+
+						Focus Events - Events that occur when elements gets or loses focus, belongs to the FocusEvent Object.
+						blur - The event occurs when an element loses focus
+						focus - The event occurs when an element gets focus
+
+						Touch Events - Events that occur when user touches a touch-based device, belongs to the TouchEvent Object.
+						touchstart - The event occurs when a finger is placed on a touch screen
+						touchmove - The event occurs when a finger is dragged across the screen
+						touchend - The event occurs when a finger is removed from a touch screen
+						touchcancel - The event occurs when the touch is interrupted
+					</aside>
 				</section>
-				<section>
+				<section id='5.2'>
 					<h3>Mouse Events</h3>
 					<ul>
 						<li class="fragment">click</li>
@@ -82,16 +170,24 @@
 						<li class="fragment">mouseover</li>
 						<li class="fragment">mouseup</li>
 					</ul>
+					<aside class="notes">
+						<!-- comment slide  -->
+						slide5.2
+					</aside>
 				</section>
-				<section>
+				<section id='5.3'>
 					<h3>Keyboard Events</h3>
 					<ul>
 						<li class="fragment">keydown</li>
 						<li class="fragment">keypress</li>
 						<li class="fragment">keyup</li>
 					</ul>
+					<aside class="notes">
+						<!-- comment slide  -->
+						slide5.3
+					</aside>
 				</section>
-				<section>
+				<section id='5.4'>
 					<h3>Drag Events</h3>
 					<ul>
 						<li class='fragment'>drag</li>
@@ -102,15 +198,23 @@
 						<li class='fragment'>dragstart</li>
 						<li class='fragment'>drop</li>
 					</ul>
+					<aside class="notes">
+						<!-- comment slide  -->
+						slide5.4
+					</aside>
 				</section>
-				<section>
+				<section id='5.5'>
 					<h3>Focus Events</h3>
 					<ul>
 						<li class="fragment">focus</li>
 						<li class="fragment">blur</li>
 					</ul>
+					<aside class="notes">
+						<!-- comment slide  -->
+						slide5.5
+					</aside>
 				</section>
-				<section>
+				<section id='5.6'>
 					<h3>Touch Events</h3>
 					<ul>
 						<li class="fragment">touchstart</li>
@@ -118,18 +222,26 @@
 						<li class="fragment">touchend</li>
 						<li class="fragment">touchcancel</li>
 					</ul>
+					<aside class="notes">
+						<!-- comment slide  -->
+						slide5.6
+					</aside>
 				</section>
 			</section>
-			<section>
-				<section>
+			<section id='6'>
+				<section id='6.1'>
 					<h2>Event Handling Models</h2>
 					<ul>
 						<li class="fragment">inline.</li>
 						<li class="fragment">traditional.</li>
 						<li class="fragment">W3C.</li>
 					</ul>
+					<aside class="notes">
+						<!-- comment slide  -->
+						There are three ways to register events handlers: inline, traditional, and W3C.
+					</aside>
 				</section>
-				<section>
+				<section id='6.2'>
 					<h3><b>Inline</b> Event Handling Model</h3>
 					<div class='fragment'>
 						<button onClick="alert('clicked!')" style='font-size:30px;'>Click me!</button>
@@ -139,8 +251,15 @@
 							</code></pre>
 					</div>
 					<p class='fragment' style='color:#FF4848'>Don’t recommend embedding events directly in page elements!</p>
+					<aside class="notes">
+						<!-- comment slide  -->
+						The JavaScript code in the attribute is passed the Event object via the event parameter. The return value is
+						treated in a special way, described in the HTML specification.
+						This approach is highly discouraged. It is a very inflexible method of defining event behavior, and intermixes
+						the structure of an HTML page and application functionality.
+					</aside>
 				</section>
-				<section>
+				<section id='6.3'>
 					<h3><b>Traditional</b> Event Handling Model</h3>
 					<div class='fragment'>
 						<button id='btn-click2' style='font-size:30px;'>Click me!</button>
@@ -161,8 +280,13 @@
 								</script>
 							</code></pre>
 					</div>
+					<aside class="notes">
+						<!-- comment slide  -->
+						This approach separates our JavaScript from our HTML, which is great. It works by setting a callback function as
+						an attribute of an HTML element. However, this approach only allows one handler per element.
+					</aside>
 				</section>
-				<section>
+				<section id='6.4'>
 					<h3><b>W3C</b> Event Handling Model</h3>
 					<div class='fragment'>
 						<button id='btn-click3' style='font-size:30px;'>Click me!</button>
@@ -186,10 +310,18 @@
 								</script>
 							</code></pre>
 					</div>
+					<aside class="notes">
+						<!-- comment slide  -->
+						To get the most control over events when scripting the DOM, we want to use a event listener.
+						This might look a little more complicated than the previous methods, but the extra code is worth taking the time
+						to type out. The big advantage to event listener is that you can have as many handlers for an event. You can also
+						specify whether the event handler is to be fired on the Capture or Bubble Phase
+						(that's the third parameter in "addEventListener()" - true means Capture Phase, and false means Bubble Phase).
+					</aside>
 				</section>
 			</section>
-			<section>
-				<section>
+			<section id='7'>
+				<section id='7.1'>
 					<h2>Event Object</h2>
 					<p class='fragment'>All event objects in the DOM are based on the Event Object.</p>
 					<pre class='fragment'>
@@ -203,8 +335,15 @@
 									})
 								</script>
 							</code></pre>
+					<aside class="notes">
+						<!-- comment slide  -->
+						To properly handle an event we’d want to know more about what’s happened. Not just a “click” or a “keypress”, but
+						what were the pointer coordinates? Which key was pressed? And so on.
+						When an event happens, the browser creates an event object, puts details into it and passes it as an argument to
+						the handler.
+					</aside>
 				</section>
-				<section>
+				<section id='7.2'>
 					<h2>Event Target</h2>
 					<p class='fragment'>The target event property returns the element that triggered the event.</p>
 					<pre class='fragment'>
@@ -217,11 +356,22 @@
 									})
 								</script>
 							</code></pre>
+					<aside class="notes">
+						<!-- comment slide  -->
+						A handler on a parent element can always get the details about where it actually happened.
+						The most deeply nested element that caused the event is called a target element, accessible as event.target.
+						When an event happens – the most nested element where it happens gets labeled as the “target element”
+						(event.target).
+						Then the event first moves from the document root down to the event.target, calling handlers assigned with
+						addEventListener(...., true) on the way.
+						Then the event moves from event.target up to the root, calling handlers assigned using on "event" and
+						addEventListener without the 3rd argument or with the 3rd argument false.
+					</aside>
 				</section>
 			</section>
-			<section>
+			<section id='8'>
 				<h2>Event Methods</h2>
-				<section>
+				<section id='8.1'>
 					<p class='fragment'>preventDefault</p>
 					<pre class='fragment'>
 							<code class="xml" data-trim contenteditable style="font-size:20px;">
@@ -235,8 +385,14 @@
 </script>
 							</code>
 					</pre>
+					<aside class="notes">
+						<!-- comment slide  -->
+						All the default actions can be prevented if we want to handle the event exclusively by JavaScript.
+						To prevent a default action – use either event.preventDefault() .
+						If the default action was prevented, the value of event.defaultPrevented becomes true, otherwise it’s false.
+					</aside>
 				</section>
-				<section>
+				<section id='8.2'>
 					<p class='fragment'>stopPropagation</p>
 					<pre class='fragment'>
 						<code class="xml" data-trim contenteditable style="font-size:20px;">
@@ -255,6 +411,11 @@
 </script>
 						</code>
 					</pre>
+					<aside class="notes">
+						<!-- comment slide  -->
+						Any event handler can stop the event by calling event.stopPropagation(), but that’s not recommended, because we
+						can’t really be sure we won’t need it above, maybe for completely different things.
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -268,6 +429,7 @@
 		// - https://github.com/hakimel/reveal.js#configuration
 		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
+			showNotes: true,
 			dependencies: [{
 					src: 'plugin/markdown/marked.js'
 				},
